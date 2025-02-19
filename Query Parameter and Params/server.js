@@ -5,7 +5,6 @@ app.get("/", (req, res) => {
   res.send(`<h1>Hello World</h1>`);
 });
 
-
 //Query Parameters...
 app.get("/profile", (req, res) => {
   const {username, age, address} = req.query;
@@ -13,13 +12,11 @@ app.get("/profile", (req, res) => {
   res.send(`<center><h1>Profile of ${username}, Age ${age} living at ${address}</h1></center>`);
 });
 
-
 //Params....
 app.get("/profile/:username",(req,res)=>{
   const {username} = req.params;
   res.send("Hi"+ " "+username);
 });
-
 
 //Users Data
 let usersData = [
@@ -44,7 +41,6 @@ app.get("/allusers", (req, res) => {
   res.send(usersData);
 });
 
-
 //Finding user by id
 app.get("/userByid", (req, res) => {
   let {id} = req.query;
@@ -55,7 +51,6 @@ app.get("/userByid", (req, res) => {
   }
   res.send("User not found");
 });
-
 
 //Delete user by id
 app.get("/deleteuserbyid",(req,res)=>{
@@ -68,7 +63,6 @@ app.get("/deleteuserbyid",(req,res)=>{
   }
   res.send("<center><h1>No User Found</h1></center>");
 });
-
 
 //Adding new user
 app.get("/adduser", (req,res)=>{
@@ -84,7 +78,6 @@ app.get("/adduser", (req,res)=>{
   }
   res.send(usersData);
 })
-
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
