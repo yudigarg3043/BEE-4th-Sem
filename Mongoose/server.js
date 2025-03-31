@@ -25,10 +25,37 @@ app.get("/users", async(req, res) => {
 
 //get user by id
 app.get("/users/:id", async(req, res) => {
-    let {id} = req.params.id;
+    let {id} = req.params;
     let user = await User.findOne(id);
     res.send(user);
-} );
+});
+
+//Delete user
+app.delete("/user/:id", async(req,res)=>{
+  let {id} = req.params;
+  let user = await User.findOneAndDelete(id); 
+  //findOneAndDelete() deletes single documents from the collection on the basis of a filter and sort criteria as well as it returns the deleted document.
+  
+  // let user = await User.deleteOne(id);
+  //deleteOne() removes single document from the collection.
+
+  // let user = await User.findByIdAndDelete(id);
+  //findByIdAndDelete() deletes single documents from the collection on the basis of a filter and sort criteria as well as it returns the deleted document.
+
+  res.send(user);
+});
+
+
+app.put("/user/:id", async (req,res)=>{
+  let {id} = req.params;
+  let {name, email, password} = req.body;
+  let user = await User.findByIdAndUpdate(id, {
+    name: name,
+    email: email,
+    password: password
+  })
+  res.send(user);
+})
 
 mongoose.connect('mongodb://127.0.0.1:27017/blogging')
   .then(() => console.log('Connected!'));
