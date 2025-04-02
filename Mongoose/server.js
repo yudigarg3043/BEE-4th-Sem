@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const port = 3500;
 
 const User = require("./model/user");
+const Blog = require("./model/blog");
 
 //add new user
 app.post("/users", async(req, res) => {
@@ -57,7 +58,53 @@ app.put("/user/:id", async (req,res)=>{
   res.send(user);
 })
 
-mongoose.connect('mongodb://127.0.0.1:27017/blogging')
+
+// Add new blog
+app.post("/blogs", async (req, res) => {
+  const { title, content, author } = req.body;
+  const newBlog = new Blog({
+      title: title,
+      content: content,
+      author: author
+  });
+  await newBlog.save();
+  res.send("Blog created");
+});
+
+// Get all blogs
+app.get("/blogs", async (req, res) => {
+  const allBlogs = await Blog.find();
+  res.send(allBlogs);
+});
+
+// Get blog by Title
+app.get("/blogs/:title", async (req, res) => {
+  const { title } = req.params;
+  const blog = await Blog.findOne(title);
+  res.send(blog);
+});
+
+// Delete blog by ID
+app.delete("/blogs/:title", async (req, res) => {
+  const { title } = req.params;
+  const deletedBlog = await Blog.findOneAndDelete(title);
+  res.send(deletedBlog);
+});
+
+// Update blog by title
+app.put("/blogs/:title", async (req, res) => {
+  const { title } = req.params;
+  const { content, author } = req.body;
+  const updatedBlog = await Blog.findByIdAndUpdate(
+      id,
+      { title, content, author },
+      { new: true }
+  );
+  res.send(updatedBlog);
+});
+
+
+mongoose.connect('mongodb://127.0.0.1:27017/user')
   .then(() => console.log('Connected!'));
 
 app.listen(port, () => {    
