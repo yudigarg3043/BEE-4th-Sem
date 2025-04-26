@@ -1,21 +1,31 @@
 const mongoose = require("mongoose");
 
+// let blogSchema = new mongoose.Schema({
+//     title : {
+//         type : String,
+//         require : true
+//     },
+//     content : {
+//         type : String,
+//         require : true
+//     },
+//     author : {
+//         type : String,
+//         require : true
+//     },
+//     date : {
+//         type : Date,
+//         default : Date.now()
+//     }
+// });
 let blogSchema = new mongoose.Schema({
-    title : {
+    Title : {
         type : String,
         require : true
     },
-    content : {
+    Writer : {
         type : String,
         require : true
-    },
-    author : {
-        type : String,
-        require : true
-    },
-    date : {
-        type : Date,
-        default : Date.now()
     }
 });
 
