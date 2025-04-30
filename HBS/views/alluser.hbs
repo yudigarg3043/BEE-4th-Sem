@@ -6,23 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li href="/">Home</li>
-                <li href="/blogs">Blogs</li>
-            </ul>
-        </nav>
-    </header>
-    <h1>This is Blog Page</h1>
+    <center><h1>List of All Users</h1></center>
     <ul>
         {{#if data}}
         {{#each data}}
         <li>
-            <h3>{{Title}}</h3>
-            <p>{{Writer}}</p>
+            <h2>Name: {{name}}</h2>
+            <p>Email: {{email}}</p>
+            <p>Password: {{password}}</p>
         </li>
-        <a href="/blogs/{{_id}}">Read More</a>
         {{/each}}
         {{else}}
         <h4>No Data Found</h4>

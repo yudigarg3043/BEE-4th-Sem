@@ -14,19 +14,8 @@
             </ul>
         </nav>
     </header>
-    <h1>This is Blog Page</h1>
-    <ul>
-        {{#if data}}
-        {{#each data}}
-        <li>
-            <h3>{{Title}}</h3>
-            <p>{{Writer}}</p>
-        </li>
-        <a href="/blogs/{{_id}}">Read More</a>
-        {{/each}}
-        {{else}}
-        <h4>No Data Found</h4>
-        {{/if}}
-    </ul>
+    <h1>{{blog.Title}}</h1>
+    <p>{{blog.Content}}</p>
+    <p>{{blog.Writer}}</p>
 </body>
 </html>
