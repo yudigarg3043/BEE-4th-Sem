@@ -2,8 +2,10 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const port = 4002;
+var hbs = require('hbs');
 
 app.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + '/views/partials', function (err) {});
 
 // const userRoutes = require("./routes/userRoutes");
 
@@ -14,6 +16,9 @@ const blog = require("./model/blog");
 app.use(express.json());
 // app.use("/users", userRoutes); //will work on every request with base path /users
 // app.use("/blogs", blogRoutes);
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.get("/", (req,res)=>{
     res.render("home",{
@@ -56,6 +61,22 @@ app.get("/blogs/:id", async(req,res)=>{
     res.render("blog",{
         blog: blogs
     })
+})
+
+app.get("/addblog", async(req,res)=>{
+    res.render("addblog");
+})
+
+app.post("/addblog", async(req,res)=>{
+    const {title,content, author} = req.body;
+    const NewBlog = new blog({
+        Title: title,
+        Content: content,
+        Author: author
+    });
+    console.log(title, content, author)
+    await NewBlog.save();
+    res.redirect("/blogs");
 })
 
 
